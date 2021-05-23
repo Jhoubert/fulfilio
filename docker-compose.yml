@@ -1,0 +1,53 @@
+version: '3.7'
+services:
+  rabbitmq:
+    image: 'rabbitmq:3.6-management-alpine'
+    ports:
+      # The standard AMQP protocol port
+      - '5672:5672'
+      # HTTP management UI 
+      - '15672:15672'
+
+    # Run this container on a private network for this application.
+    networks:
+      - network
+
+  # DATABASE SERVICE    
+  dbpostgresql: 
+    image: "postgres"
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'p0stgr3spwdFulFilIO'
+      POSTGRES_DB: fulfilio
+      PGPORT: 5432
+    networks:
+      - network
+    ports:
+      - '5445:5432'
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 2s
+      timeout: 2s
+      retries: 15
+    restart: unless-stopped
+
+  # BACKEND SERVICE    
+  backend: 
+    build: ./wservices
+    environment:
+      - DB_USER=postgres
+      - DB_PASSWORD=p0stgr3spwdFulFilIO
+      - DB_HOST=dbpostgresql
+      - DB_PORT=5432
+      - DB_NAME=fulfilio
+    networks:
+      - network
+    ports:
+      - '80:5000'
+#    depends_on:
+#      dbpostgresql:
+#        condition: service_healthy
+    restart: unless-stopped
+
+networks:
+  network: {}

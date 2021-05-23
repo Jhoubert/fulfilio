@@ -12,7 +12,7 @@ class User(Base):
 
 
 class Product(Base):
-    __tablename__ = 'user'
+    __tablename__ = 'product'
     id = Column(Integer, primary_key=True)
     name = Column(String(64))
     sku = Column(String(32), index=True)
