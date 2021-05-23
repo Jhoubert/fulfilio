@@ -1,0 +1,10 @@
+db:
+ name: fulfilio
+ user: postgres
+ password: p0stgr3spwdFulFilIO
+ host: localhost
+ port: 5432
+
+
+auth:
+ jwt_key: 4JMBk00UqjDyLyKqCs3Vcgz9UlL5D3jo
