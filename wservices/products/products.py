@@ -2,7 +2,7 @@ import json
 
 import sqlalchemy
 from flask import Blueprint, jsonify, request
-from flask_jwt_extended import create_access_token, jwt_required
+from flask_jwt_extended import jwt_required
 
 from database import db_session
 from models import Product
@@ -165,7 +165,7 @@ def delete(id):
 
 @products.route('/delete_all_products', methods=['DELETE'])
 @jwt_required()
-def delete():
+def delete_all():
     """
     ---
     delete:
