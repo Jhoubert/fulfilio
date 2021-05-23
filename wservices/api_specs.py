@@ -1,7 +1,8 @@
 from apispec import APISpec
 from apispec.ext.marshmallow import MarshmallowPlugin
 from apispec_webframeworks.flask import FlaskPlugin
-from schemas import ActionOutputSchema, LoginSchema, LoggedUserSchema
+from schemas import ActionOutputSchema, LoginSchema, LoggedUserSchema, ProductSchema, CreateProductSchema, \
+    UpdateProductSchema
 
 spec = APISpec(
     title="",
@@ -16,6 +17,11 @@ spec.components.schema("ActionOutputSchema", schema=ActionOutputSchema)
 # Auth schemes
 spec.components.schema("LoginSchema", schema=LoginSchema)
 spec.components.schema("LoggedUserSchema", schema=LoggedUserSchema)
+
+# Products schemes
+spec.components.schema("ProductSchema", schema=ProductSchema)
+spec.components.schema("UpdateProductSchema", schema=UpdateProductSchema)
+spec.components.schema("CreateProductSchema", schema=CreateProductSchema)
 
 
 tags = [

@@ -11,11 +11,17 @@ class ActionOutputSchema(Schema):
 #
 class CreateProductSchema(Schema):
     name = fields.String(description="Product name", required=True)
-    sku = fields.String(description="Product name", required=True)
-    description = fields.String(description="Product name", required=True)
+    sku = fields.String(description="SKU", required=True)
+    description = fields.String(description="Product's description", required=True)
 
 
-# Inheriting CreateMovieSchema elements only adding ID
+class UpdateProductSchema(Schema):
+    name = fields.String(description="Product name", required=False)
+    sku = fields.String(description="SKU", required=False)
+    description = fields.String(description="Product's description", required=False)
+
+
+# Inheriting CreateProductSchema elements only adding ID
 class ProductSchema(CreateProductSchema):
     id = fields.String(description="Product ID", required=False)
 
