@@ -155,7 +155,42 @@ def delete(id):
     if not obj:
         return jsonify({"msg": "User does not exists"}), 404
 
-    db_session.delete(obj)
-    db_session.commit()
+    try:
+        db_session.delete(obj)
+        db_session.commit()
+    except Exception as e:
+        return jsonify({"result": "Error deleting product "+id})
+    return jsonify({"result": "success"})
+
+
+@products.route('/delete_all_products', methods=['DELETE'])
+@jwt_required()
+def delete():
+    """
+    ---
+    delete:
+      description: Delete all products from the database
+      responses:
+        '200':
+          description: Successfully deleted
+          content:
+            application/json:
+              schema: ActionOutputSchema
+        '401':
+          description: Does't have permissions to delete.
+      parameters:
+        - name: Authorization
+          in: header
+          description: JWT authorization header
+          required: true
+          type: string
+      tags:
+          - Users
+    """
+    try:
+        db_session.query(Product).delete()
+        db_session.commit()
+    except Exception as e:
+        return jsonify({"result": "Error deleting all products"})
 
     return jsonify({"result": "success"})
