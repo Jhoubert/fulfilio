@@ -3,6 +3,7 @@ from flask import Flask, jsonify
 import config
 from config import database_string
 from database import init_engine, init_db
+from auth.auth import auth
 from products.products import products
 from docs.swagger import swagger_ui_blueprint, SWAGGER_URL
 from api_specs import spec
@@ -21,6 +22,7 @@ app.config["JWT_SECRET_KEY"] = config.cfg.get("auth").get("jwt_key")
 jwt = JWTManager(app)
 
 # register blueprints. Easy to build versioned APIs
+app.register_blueprint(auth, url_prefix="/api/v1/auth")
 app.register_blueprint(products, url_prefix="/api/v1/products")
 app.register_blueprint(swagger_ui_blueprint, url_prefix=SWAGGER_URL)
 
