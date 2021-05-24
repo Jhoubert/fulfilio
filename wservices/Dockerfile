@@ -7,5 +7,3 @@ WORKDIR /usr/src/app
 RUN pip install -r requirements.txt
 COPY . /usr/src/app
 
-
-CMD ["python", "/usr/src/app/app.py"]

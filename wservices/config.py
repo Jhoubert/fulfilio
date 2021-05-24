@@ -11,3 +11,5 @@ dbname = cfg.get("db").get("name") if "DB_NAME" not in os.environ else os.enviro
 
 database_string = 'postgresql://%s:%s@%s:%s/%s' % (user, password, host, port, dbname)
 
+amqp_url = cfg.get("amqp").get("host") if "AMQP_URL" not in os.environ else os.environ.get("AMQP_URL")
+

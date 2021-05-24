@@ -34,12 +34,14 @@ services:
   # BACKEND SERVICE    
   backend: 
     build: ./wservices
+    command: "python /usr/src/app/app.py"
     environment:
       - DB_USER=postgres
       - DB_PASSWORD=p0stgr3spwdFulFilIO
       - DB_HOST=dbpostgresql
       - DB_PORT=5432
       - DB_NAME=fulfilio
+      - AMQP_URL=rabbitmq
     networks:
       - network
     ports:
@@ -48,6 +50,27 @@ services:
 #      dbpostgresql:
 #        condition: service_healthy
     restart: unless-stopped
+    volumes:
+      - datavolume:/usr/src/app/uploads
 
+  # CELERY  
+  celery: 
+    build: ./wservices
+    command: "celery -A products.products:celery worker --loglevel=info"
+    environment:
+      - DB_USER=postgres
+      - DB_PASSWORD=p0stgr3spwdFulFilIO
+      - DB_HOST=dbpostgresql
+      - DB_PORT=5432
+      - DB_NAME=fulfilio
+      - AMQP_URL=rabbitmq
+    networks:
+      - network
+    restart: unless-stopped
+    volumes:
+      - datavolume:/usr/src/app/uploads
+
+volumes:
+  datavolume: {}
 networks:
   network: {}

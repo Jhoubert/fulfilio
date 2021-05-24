@@ -8,3 +8,6 @@ db:
 
 auth:
  jwt_key: 4JMBk00UqjDyLyKqCs3Vcgz9UlL5D3jo
+
+amqp:
+ url: localhost
