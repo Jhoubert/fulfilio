@@ -1,0 +1,96 @@
+.sended {
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    margin: 5px 0;
+    padding: 0 5px;
+  }
+  
+  .received {
+    border: 2px solid #810a0a;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    margin: 5px 0;
+    border-color: #ccc;
+    background-color: #ddd;
+    text-align: right;
+    padding: 0 5px;
+  }
+  
+  .container::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  .time-right {
+    float: right;
+    color: #aaa;
+  }
+
+  .time-left {
+    float: left;
+    color: #999;
+  }
+
+  .time {
+    float: right;
+    color: #999;
+    font-size: small;
+  }
+
+  #chatContainer{
+      top:0;
+      bottom:0;
+      left:0;
+      right:25px; 
+      height: 98%;
+      overflow:auto;    
+  }
+
+  #chatContainer p{
+    margin-bottom: 0;
+  }
+
+
+  #bottomPanel{
+    bottom:0px;
+    left:0px;
+    right:25px;
+}
+
+.ct{
+  height: 98%;
+}
+
+.scrollableContent {
+   height: 100%;
+   margin: 0em;
+   overflow-y: auto;
+}
+
+  textarea
+  {
+    width:100%;
+    display:inline;
+    line-height: 1; 
+    font-size: 12px; 
+    margin: 0; 
+    padding: 5px; display:inline;
+  }
+
+
+.textwrapper
+{
+  border:1px solid #dadada;
+  margin:5px 0;
+  padding:3px;
+}
+
+.tb{
+  width: 100%;
+}
+
+.sendbtn{
+  height: 70%;
+}
