@@ -42,6 +42,8 @@ services:
       - DB_PORT=5432
       - DB_NAME=fulfilio
       - AMQP_URL=rabbitmq
+      - DEFAULT_APP_USER=fulfilio
+      - DEFAULT_APP_PASSWORD=fulfilio
     networks:
       - network
     ports:

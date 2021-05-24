@@ -9,7 +9,7 @@ import sqlalchemy
 from celery import states, Celery
 from flask import Blueprint, jsonify, request, make_response, current_app, Flask
 from flask_jwt_extended import jwt_required
-
+from flask_cors import CORS
 import config
 from database import db_session, engine, init_engine, init_db
 from models import Product
@@ -21,13 +21,13 @@ from celery.utils.log import get_task_logger
 logging = get_task_logger(__name__)
 
 products = Blueprint(name="products", import_name=__name__)
-app = Flask(__name__)
+CORS(products)
 
+app = Flask(__name__)
 app.config.update(
     CELERY_BROKER_URL='amqp://%s' % config.amqp_url,
     CELERY_RESULT_BACKEND='amqp://%s' % config.amqp_url
 )
-
 # Database configuration and initialization for celery
 if not engine:
     app.config['SQLALCHEMY_DATABASE_URI'] = config.database_string

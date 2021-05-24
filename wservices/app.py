@@ -18,7 +18,6 @@ init_engine(app.config['SQLALCHEMY_DATABASE_URI'])
 init_db()
 
 
-
 # Setup the Flask-JWT-Extended extension
 app.config["JWT_SECRET_KEY"] = config.cfg.get("auth").get("jwt_key")
 jwt = JWTManager(app)
@@ -45,7 +44,6 @@ def create_swagger_spec():
         Swagger API definition.
     """
     return jsonify(spec.to_dict())
-
 
 
 if __name__ == "__main__":

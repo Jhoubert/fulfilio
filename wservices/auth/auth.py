@@ -5,11 +5,14 @@ from flask_jwt_extended import create_access_token, jwt_required
 from database import db_session
 from models import User
 from schemas import LoggedUserSchema, LoginSchema
+from flask_cors import CORS
 
 auth = Blueprint(name="user", import_name=__name__)
+cors = CORS()
+cors.init_app(auth, resources={r"/*": {"origins": "*", "supports_credentials": True}})
 
 
-@auth.route('/login', methods=['POST'])
+@auth.route('/login', methods=['POST', 'OPTIONS'])
 def login():
     """
     ---
@@ -31,6 +34,8 @@ def login():
       tags:
           - Users
     """
+    if request.method == 'OPTIONS':
+        return {}
 
     login_sch = LoginSchema()
     validations = login_sch.validate(request.json)
